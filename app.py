@@ -292,9 +292,36 @@ def _inject_styles() -> None:
                 margin-top: 1.3rem;
             }
             [data-testid="stExpander"] summary { color: var(--blue); font-size: 0.85rem; font-weight: 650; }
+            .content-note-grid {
+                display: grid;
+                gap: 0.85rem;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                margin-top: 2.15rem;
+            }
+            .content-note {
+                background: #f7faf9;
+                border: 1px solid #e5ecec;
+                border-radius: 3px;
+                padding: 0.9rem 1rem 0.95rem;
+            }
+            .content-note h2 {
+                color: var(--ink);
+                font-size: 0.9rem;
+                font-weight: 650;
+                margin: 0 0 0.4rem;
+            }
+            .content-note p {
+                color: var(--muted);
+                font-size: 0.8rem;
+                line-height: 1.57;
+                margin: 0;
+            }
+            @media (max-width: 780px) {
+                .content-note-grid { grid-template-columns: 1fr; }
+            }
             .about-model {
                 border-top: 1px solid var(--line);
-                margin-top: 2.5rem;
+                margin-top: 1.55rem;
                 padding-top: 1.55rem;
             }
             .model-copy, .footer-copy {
@@ -306,6 +333,11 @@ def _inject_styles() -> None:
             }
             .footer-copy { font-size: 0.8rem; margin-top: 1rem; }
             .footer-copy strong { color: var(--ink); }
+            .institution-footer {
+                border-top: 1px solid var(--line);
+                margin-top: 1.35rem;
+                padding-top: 1rem;
+            }
             .stPlotlyChart { border: 1px solid #edf1f2; border-radius: 2px; }
         </style>
         """,
@@ -549,6 +581,25 @@ def _render_forecast_cards(state_forecasts: pd.DataFrame, uf: str) -> None:
             )
 
 
+def _render_use_and_sources() -> None:
+    st.markdown(
+        """
+        <section class="content-note-grid">
+            <article class="content-note">
+                <h2>Uso e interpretação</h2>
+                <p>A ferramenta foi desenvolvida como apoio à decisão em saúde pública, podendo auxiliar gestores e equipes do SUS na vigilância, no planejamento regional e estadual, na preparação de ações preventivas e na gestão de recursos, incluindo a distribuição e o estoque de antivenenos.</p>
+                <p style="margin-top:0.55rem;">As previsões são baseadas em séries históricas de acidentes escorpiônicos registradas em bases oficiais, agregadas por unidade federativa. Sua interpretação deve considerar também fatores socioeconômicos e locais, bem como o fato de que as estimativas de incidência podem ser influenciadas por padrões de subnotificação.</p>
+            </article>
+            <article class="content-note">
+                <h2>Dados e fontes</h2>
+                <p>Dados de acidentes escorpiônicos: DATASUS/SINAN (TabNet).<br>Estimativas populacionais: IBGE.</p>
+            </article>
+        </section>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
 def _render_about_model() -> None:
     st.markdown('<section class="about-model">', unsafe_allow_html=True)
     st.markdown('<p class="section-kicker">Fundamentação científica</p>', unsafe_allow_html=True)
@@ -563,6 +614,16 @@ def _render_about_model() -> None:
             Martinez et al. (2026). <em>Deep learning forecasting of scorpion envenoming incidence in Brazil to support early warning and prevention.</em>
             Communications Health 1, Article 2. <a href="{ARTICLE_URL}" target="_blank">Consultar publicação</a>.
         </p>
+        """,
+        unsafe_allow_html=True,
+    )
+    st.markdown('</section>', unsafe_allow_html=True)
+
+
+def _render_institutional_footer() -> None:
+    st.markdown('<footer class="institution-footer">', unsafe_allow_html=True)
+    st.markdown(
+        """
         <p class="footer-copy">
             <strong>Desenvolvido no âmbito do INCT-CONEXAO</strong><br>
             Instagram: <a href="https://www.instagram.com/inct_conexao/" target="_blank" rel="noopener noreferrer">@inct_conexao</a><br>
@@ -572,7 +633,7 @@ def _render_about_model() -> None:
         """,
         unsafe_allow_html=True,
     )
-    st.markdown('</section>', unsafe_allow_html=True)
+    st.markdown('</footer>', unsafe_allow_html=True)
 
 
 def main() -> None:
@@ -668,7 +729,9 @@ def main() -> None:
         st.caption(UNIT_LABEL)
         st.dataframe(table, hide_index=True, use_container_width=True)
 
+    _render_use_and_sources()
     _render_about_model()
+    _render_institutional_footer()
 
 
 if __name__ == "__main__":
