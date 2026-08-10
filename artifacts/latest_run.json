@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "is_mock": false,
+  "generated_at_utc": "2026-08-10T00:25:46.942577+00:00",
+  "input_file": "incidencia_total.csv",
+  "input_sha256": "e15732646a956fda49004eb284446baea0083336d3056c4af697c51e2cbe2880",
+  "observed_start": "2007-01",
+  "observed_end": "2026-05",
+  "forecast_months": [
+    "2026-06",
+    "2026-07",
+    "2026-08",
+    "2026-09",
+    "2026-10",
+    "2026-11"
+  ],
+  "forecast_horizon_months": 6,
+  "forecast_rows": 162
+}
