@@ -1,19 +1,263 @@
 {
   "schema_version": 1,
-  "is_mock": false,
-  "generated_at_utc": "2026-08-10T00:25:46.942577+00:00",
+  "generated_at_utc": "2026-09-13T15:16:29.248241+00:00",
   "input_file": "incidencia_total.csv",
-  "input_sha256": "e15732646a956fda49004eb284446baea0083336d3056c4af697c51e2cbe2880",
+  "input_sha256": "89530617b302bd2e591386b942ff8a513992ab1449cdcb9d9798d9984f67a2bb",
   "observed_start": "2007-01",
-  "observed_end": "2026-05",
+  "observed_end": "2026-06",
   "forecast_months": [
-    "2026-06",
     "2026-07",
     "2026-08",
     "2026-09",
     "2026-10",
-    "2026-11"
+    "2026-11",
+    "2026-12"
   ],
   "forecast_horizon_months": 6,
-  "forecast_rows": 162
+  "forecast_rows": 162,
+  "darts_version": "0.41.0",
+  "python_version": "3.12.13",
+  "regional_models": [
+    {
+      "slug": "norte",
+      "region": "Norte",
+      "states": [
+        "RO",
+        "AC",
+        "AM",
+        "RR",
+        "PA",
+        "AP",
+        "TO"
+      ],
+      "notebook_name": "Modelos_Series_DARTs_MultiSerieEscorpioes_Norte_INCT_art_state_NBeats_Norte_aplicado_R1.ipynb",
+      "input_chunk_length": 24,
+      "output_chunk_length": 6,
+      "n_epochs": 2000,
+      "num_layers": 3,
+      "num_blocks": 1,
+      "layer_widths": 256,
+      "dropout": 0.2350026285806562,
+      "batch_size": 64,
+      "learning_rate": 0.00019956027512991597,
+      "weight_decay": 0.00016884705763267025,
+      "early_stopping_patience": 30,
+      "logger_name": "nbeats_training"
+    },
+    {
+      "slug": "nordeste",
+      "region": "Nordeste",
+      "states": [
+        "MA",
+        "PI",
+        "CE",
+        "RN",
+        "PB",
+        "PE",
+        "AL",
+        "SE",
+        "BA"
+      ],
+      "notebook_name": "Modelos_Series_DARTs_MultiSerieEscorpioes_Nordeste_INCT_art_state_NBeats_aplicado_R1.ipynb",
+      "input_chunk_length": 24,
+      "output_chunk_length": 6,
+      "n_epochs": 2376,
+      "num_layers": 5,
+      "num_blocks": 2,
+      "layer_widths": 1028,
+      "dropout": 0.011609741106300553,
+      "batch_size": 32,
+      "learning_rate": 1.076058407591676e-05,
+      "weight_decay": 3.331027775380738e-06,
+      "early_stopping_patience": 30,
+      "logger_name": "nbeats_training"
+    },
+    {
+      "slug": "sudeste",
+      "region": "Sudeste",
+      "states": [
+        "SP",
+        "RJ",
+        "MG",
+        "ES"
+      ],
+      "notebook_name": "Modelos_Series_DARTs_MultiSerieEscorpioes_Sudeste_INCT_art_state_NBeats_aplicado_R1.ipynb",
+      "input_chunk_length": 24,
+      "output_chunk_length": 6,
+      "n_epochs": 2039,
+      "num_layers": 3,
+      "num_blocks": 1,
+      "layer_widths": 512,
+      "dropout": 0.13249416489743512,
+      "batch_size": 16,
+      "learning_rate": 2.2202389301827935e-05,
+      "weight_decay": 0.00012716238022638548,
+      "early_stopping_patience": 30,
+      "logger_name": "nbeats_training"
+    },
+    {
+      "slug": "sul",
+      "region": "Sul",
+      "states": [
+        "PR",
+        "SC",
+        "RS"
+      ],
+      "notebook_name": "Modelos_Series_DARTs_MultiSerieEscorpioes_Sul_INCT_art_state_NBeats_aplicado_R1.ipynb",
+      "input_chunk_length": 24,
+      "output_chunk_length": 6,
+      "n_epochs": 1629,
+      "num_layers": 6,
+      "num_blocks": 1,
+      "layer_widths": 256,
+      "dropout": 0.11257447875639547,
+      "batch_size": 16,
+      "learning_rate": 4.374500226188874e-05,
+      "weight_decay": 9.623086525207204e-05,
+      "early_stopping_patience": 30,
+      "logger_name": "nbeats_best_run"
+    },
+    {
+      "slug": "centro_oeste",
+      "region": "Centro-Oeste",
+      "states": [
+        "DF",
+        "GO",
+        "MT",
+        "MS"
+      ],
+      "notebook_name": "Modelos_Series_DARTs_MultiSerieEscorpioes_centrooeste_INCT_art_state_NBeats_aplicado_R1.ipynb",
+      "input_chunk_length": 24,
+      "output_chunk_length": 6,
+      "n_epochs": 3500,
+      "num_layers": 3,
+      "num_blocks": 1,
+      "layer_widths": 128,
+      "dropout": 0.16284679461947496,
+      "batch_size": 64,
+      "learning_rate": 0.0003102970912490537,
+      "weight_decay": 0.00012557826699840724,
+      "early_stopping_patience": 15,
+      "logger_name": "nbeats_best_run"
+    }
+  ],
+  "training_runs": [
+    {
+      "region": "Norte",
+      "states": [
+        "RO",
+        "AC",
+        "AM",
+        "RR",
+        "PA",
+        "AP",
+        "TO"
+      ],
+      "n_epochs_max": 2000,
+      "early_stopping": {
+        "monitor": "val_loss",
+        "patience": 30,
+        "mode": "min",
+        "validation_series": "ultimos 36 meses da serie completa; tambem presentes na serie principal de treino, como no notebook"
+      },
+      "mc_dropout": {
+        "enabled": true,
+        "samples": 500
+      },
+      "logged_train_epochs": 321,
+      "logger_directory": "/content/drive/MyDrive/Scorpion_forecast_web/logs/nbeats_training/version_6"
+    },
+    {
+      "region": "Nordeste",
+      "states": [
+        "MA",
+        "PI",
+        "CE",
+        "RN",
+        "PB",
+        "PE",
+        "AL",
+        "SE",
+        "BA"
+      ],
+      "n_epochs_max": 2376,
+      "early_stopping": {
+        "monitor": "val_loss",
+        "patience": 30,
+        "mode": "min",
+        "validation_series": "ultimos 36 meses da serie completa; tambem presentes na serie principal de treino, como no notebook"
+      },
+      "mc_dropout": {
+        "enabled": true,
+        "samples": 500
+      },
+      "logged_train_epochs": 690,
+      "logger_directory": "/content/drive/MyDrive/Scorpion_forecast_web/logs/nbeats_training/version_7"
+    },
+    {
+      "region": "Sudeste",
+      "states": [
+        "SP",
+        "RJ",
+        "MG",
+        "ES"
+      ],
+      "n_epochs_max": 2039,
+      "early_stopping": {
+        "monitor": "val_loss",
+        "patience": 30,
+        "mode": "min",
+        "validation_series": "ultimos 36 meses da serie completa; tambem presentes na serie principal de treino, como no notebook"
+      },
+      "mc_dropout": {
+        "enabled": true,
+        "samples": 500
+      },
+      "logged_train_epochs": 260,
+      "logger_directory": "/content/drive/MyDrive/Scorpion_forecast_web/logs/nbeats_training/version_8"
+    },
+    {
+      "region": "Sul",
+      "states": [
+        "PR",
+        "SC",
+        "RS"
+      ],
+      "n_epochs_max": 1629,
+      "early_stopping": {
+        "monitor": "val_loss",
+        "patience": 30,
+        "mode": "min",
+        "validation_series": "ultimos 36 meses da serie completa; tambem presentes na serie principal de treino, como no notebook"
+      },
+      "mc_dropout": {
+        "enabled": true,
+        "samples": 500
+      },
+      "logged_train_epochs": 264,
+      "logger_directory": "/content/drive/MyDrive/Scorpion_forecast_web/logs/nbeats_best_run/version_4"
+    },
+    {
+      "region": "Centro-Oeste",
+      "states": [
+        "DF",
+        "GO",
+        "MT",
+        "MS"
+      ],
+      "n_epochs_max": 3500,
+      "early_stopping": {
+        "monitor": "val_loss",
+        "patience": 15,
+        "mode": "min",
+        "validation_series": "ultimos 36 meses da serie completa; tambem presentes na serie principal de treino, como no notebook"
+      },
+      "mc_dropout": {
+        "enabled": true,
+        "samples": 500
+      },
+      "logged_train_epochs": 129,
+      "logger_directory": "/content/drive/MyDrive/Scorpion_forecast_web/logs/nbeats_best_run/version_5"
+    }
+  ]
 }
