@@ -50,6 +50,7 @@ LOGO_SPECS = (
     ("inct_conexao", "INCT-CONEXAO"),
     ("ufs", "Universidade Federal de Sergipe"),
     ("martes", "MarTeS"),
+    ("cnpq_mcti_capes_mec", "CNPq, MCTI, CAPES e MEC"),
 )
 
 
@@ -131,12 +132,23 @@ def _inject_styles() -> None:
             .institution-logos {
                 align-items: center;
                 display: flex;
+                flex-wrap: wrap;
                 gap: 1.25rem;
                 min-height: 49px;
                 margin-bottom: 1rem;
             }
+            .logo-container {
+                max-width: 100%;
+            }
+            .logo-container:last-child {
+                width: 430px;
+            }
+            .logo-container:last-child .institution-logo {
+                max-width: 100%;
+            }
             .institution-logo {
                 display: block;
+                height: auto;
                 max-height: 45px;
                 max-width: 155px;
                 object-fit: contain;
